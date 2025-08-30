@@ -44,13 +44,13 @@ fun RegistrationScreen(viewModel: UserFormViewModel, navHostController: NavHostC
         LazyColumn(
             modifier = Modifier
                 .align(Alignment.TopStart)
-                .padding(horizontal = 10.dp, vertical = 5.dp)
+                .padding(horizontal = 10.dp, vertical = 30.dp)
         ) {
             item { BackTrackButton(modifier = Modifier.padding(bottom = 40.dp), navHostController) }
 
             item {
 
-                Column(Modifier.padding(bottom = 10.dp)) {
+                Column(Modifier.padding(bottom = 20.dp)) {
                     Text(
                         "Регистрация для ",
                         fontWeight = FontWeight.Bold,
@@ -77,7 +77,7 @@ fun RegistrationScreen(viewModel: UserFormViewModel, navHostController: NavHostC
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 10.dp, vertical = 5.dp)
+                .padding(horizontal = 10.dp, vertical = 20.dp)
                 .align(Alignment.BottomCenter)
             , horizontalAlignment = Alignment.CenterHorizontally
         ) {

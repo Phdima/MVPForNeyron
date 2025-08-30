@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.testforneyron.presentation.screens.MainScreen
+import com.example.testforneyron.presentation.screens.PurchasesScreen
 import com.example.testforneyron.presentation.screens.RegistrationScreen
 import com.example.testforneyron.presentation.theme.TestForNeyronTheme
 import com.example.testforneyron.presentation.viewModels.UserFormViewModel
@@ -30,6 +31,9 @@ class MainActivity : ComponentActivity() {
                     }
                     composable("registration"){
                         RegistrationScreen(navHostController = navController, viewModel = viewModel)
+                    }
+                    composable("purchases"){
+                        PurchasesScreen(navHostController = navController)
                     }
                 }
             }

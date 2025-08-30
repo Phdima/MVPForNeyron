@@ -1,5 +1,10 @@
 package com.example.testforneyron.presentation.screens
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,8 +23,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.testforneyron.presentation.components.BackTrackButton
@@ -28,6 +35,18 @@ import com.example.testforneyron.presentation.viewModels.UserFormViewModel
 
 @Composable
 fun MainScreen(viewModel: UserFormViewModel, navHostController: NavHostController) {
+
+    val context = LocalContext.current
+
+    val cameraPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            Toast.makeText(context, "Доступ к камере разрешен", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Доступ к камере запрещен \n  перейдите в настройки", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     val user by viewModel.user.collectAsState()
 
@@ -41,18 +60,19 @@ fun MainScreen(viewModel: UserFormViewModel, navHostController: NavHostControlle
         LazyColumn(
             modifier = Modifier
                 .align(Alignment.TopStart)
-                .padding(horizontal = 10.dp, vertical = 5.dp)
+                .padding(horizontal = 10.dp, vertical = 30.dp)
         ) {
             item { BackTrackButton(modifier = Modifier.padding(bottom = 40.dp), navHostController) }
 
             item {
                 Column {
 
-                    Text(text =if (user?.firstName == null){
-                        "Имя"
-                    }else{
-                        user?.firstName.toString()
-                    },
+                    Text(
+                        text = if (user?.firstName == null) {
+                            "Имя"
+                        } else {
+                            user?.firstName.toString()
+                        },
                         modifier = Modifier.padding(bottom = 10.dp),
                         fontWeight = FontWeight.Bold,
                         color = Color.White
@@ -60,11 +80,13 @@ fun MainScreen(viewModel: UserFormViewModel, navHostController: NavHostControlle
 
                     Row(modifier = Modifier.padding(bottom = 10.dp)) {
 
-                        Text(text =if (user?.lastName == null){
-                            "Фамилия"
-                        }else{
-                            user?.lastName.toString()
-                        }, fontWeight = FontWeight.Bold, color = Color.White)
+                        Text(
+                            text = if (user?.lastName == null) {
+                                "Фамилия"
+                            } else {
+                                user?.lastName.toString()
+                            }, fontWeight = FontWeight.Bold, color = Color.White
+                        )
 
                         Icon(
                             Icons.Default.Create,
@@ -89,7 +111,7 @@ fun MainScreen(viewModel: UserFormViewModel, navHostController: NavHostControlle
 
                     UniversalButtonForMainScreen(
                         isHasImage = true,
-                        onClick = {},
+                        onClick = { navHostController.navigate("purchases") },
                     )
                 }
             }
@@ -114,12 +136,29 @@ fun MainScreen(viewModel: UserFormViewModel, navHostController: NavHostControlle
 
                     UniversalButtonForMainScreen(
                         text = "Запрос пермишенов",
-                        onClick = {},
+                        onClick = {
+                            when (PackageManager.PERMISSION_GRANTED) {
+                                ContextCompat.checkSelfPermission(
+                                    context,
+                                    Manifest.permission.CAMERA
+                                ) -> {
+                                    Toast.makeText(
+                                        context,
+                                        "Камера уже доступна",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+
+                                else -> {
+                                    cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+                                }
+                            }
+                        },
                     )
 
                     UniversalButtonForMainScreen(
                         text = "Регистрация для клиентов банка",
-                        onClick = {navHostController.navigate("registration")},
+                        onClick = { navHostController.navigate("registration") },
                     )
 
                     UniversalButtonForMainScreen(

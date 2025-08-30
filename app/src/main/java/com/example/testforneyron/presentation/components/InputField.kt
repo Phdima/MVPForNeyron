@@ -72,8 +72,15 @@ fun InputField(viewModel: UserFormViewModel) {
                 } else {
                     Color.Transparent
                 },
-                errorTextColor = Color.Red,
                 focusedIndicatorColor = Color.Transparent,
+                focusedSupportingTextColor = Color.Gray,
+                disabledSupportingTextColor = Color.Gray,
+                unfocusedSupportingTextColor = Color.Gray,
+                unfocusedPlaceholderColor = Color.Gray,
+                focusedPlaceholderColor = Color.Gray,
+                disabledPlaceholderColor = Color.Gray,
+                unfocusedLabelColor = Color.Gray,
+                errorTextColor = Color.Red,
                 errorSupportingTextColor = Color.Red,
                 errorLabelColor = Color.Red,
                 errorIndicatorColor = Color.Red
@@ -124,6 +131,13 @@ fun InputField(viewModel: UserFormViewModel) {
                 errorLabelColor = Color.Red,
                 errorTextColor = Color.Red,
                 errorSupportingTextColor = Color.Red,
+                focusedSupportingTextColor = Color.Gray,
+                disabledSupportingTextColor = Color.Gray,
+                unfocusedSupportingTextColor = Color.Gray,
+                unfocusedPlaceholderColor = Color.Gray,
+                focusedPlaceholderColor = Color.Gray,
+                disabledPlaceholderColor = Color.Gray,
+                unfocusedLabelColor = Color.Gray,
                 focusedIndicatorColor = Color.Transparent
             )
         )
@@ -171,8 +185,15 @@ fun InputField(viewModel: UserFormViewModel) {
                 errorTextColor = Color.Red,
                 errorLabelColor = Color.Red,
                 errorIndicatorColor = Color.Red,
+                errorSupportingTextColor = Color.Red,
                 focusedIndicatorColor = Color.Transparent,
-                errorSupportingTextColor = Color.Red
+                unfocusedLabelColor = Color.Gray,
+                unfocusedPlaceholderColor = Color.Gray,
+                focusedPlaceholderColor = Color.Gray,
+                disabledPlaceholderColor = Color.Gray,
+                focusedSupportingTextColor = Color.Gray,
+                disabledSupportingTextColor = Color.Gray,
+                unfocusedSupportingTextColor = Color.Gray,
             )
         )
 
@@ -218,9 +239,17 @@ fun InputField(viewModel: UserFormViewModel) {
                 },
                 errorTextColor = Color.Red,
                 errorLabelColor = Color.Red,
-                focusedIndicatorColor = Color.Transparent,
                 errorIndicatorColor = Color.Red,
-                errorSupportingTextColor = Color.Red
+                errorSupportingTextColor = Color.Red,
+                unfocusedPlaceholderColor = Color.Gray,
+                focusedPlaceholderColor = Color.Gray,
+                disabledPlaceholderColor = Color.Gray,
+                focusedSupportingTextColor = Color.Gray,
+                disabledSupportingTextColor = Color.Gray,
+                unfocusedSupportingTextColor = Color.Gray,
+                unfocusedLabelColor = Color.Gray,
+                focusedIndicatorColor = Color.Transparent,
+
             )
         )
     }
